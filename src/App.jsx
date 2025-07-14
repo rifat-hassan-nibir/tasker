@@ -1,9 +1,14 @@
 import "./App.css";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Hero from "./components/Hero";
 
 function App() {
   return (
     <>
-      <h1>Hello There</h1>
+      <Header />
+      <Hero />
+      <Footer />
     </>
   );
 }
