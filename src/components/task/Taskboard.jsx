@@ -16,10 +16,28 @@ const defaultTasks = {
 export default function TaskBoard() {
   const [tasks, setTasks] = useState([defaultTasks]);
   const [showModal, setShowModal] = useState(false);
-  
+  const [taskToUpdate, setTaskToUpdate] = useState(null);
+
+  // FUNCTION TO ADD NEW TASK
+  const handleAddTask = (task) => {
+    const newTasks = [...tasks, task];
+    // ADD THE NEW TASK TO THE STATE
+    setTasks(newTasks);
+    // HIDE THE MODAL
+    setShowModal(false);
+    // RESET THE taskToUpdate STATE
+    setTaskToUpdate(null);
+  };
+
+  // FUNCTION TO EDIT TASK
+  const handleEditTask = (task) => {
+    setTaskToUpdate(task);
+    setShowModal(true);
+  };
+
   return (
     <section className="mb-20" id="tasks">
-      {showModal && <AddTaskModal />}
+      {showModal && <AddTaskModal onSave={handleAddTask} taskToUpdate={taskToUpdate} />}
       <div className="container mx-auto">
         {/* Search Box  */}
         <div className="p-2 flex justify-end">
@@ -27,8 +45,8 @@ export default function TaskBoard() {
         </div>
         {/* Search Box Ends */}
         <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
-          <TaskActions addButtonClick={() => setShowModal(true)}/>
-          <TaskList tasks={tasks} />
+          <TaskActions addButtonClick={() => setShowModal(true)} />
+          <TaskList tasks={tasks} onEdit={handleEditTask} />
         </div>
       </div>
     </section>
