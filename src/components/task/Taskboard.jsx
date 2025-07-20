@@ -49,9 +49,15 @@ export default function TaskBoard() {
   };
 
   // FUNCTION TO DELETE TASK
-  const handleDeleteTask = (taskToDelete) => {
-    const tasksAfterDelete = tasks.filter((task) => task.id !== taskToDelete.id);
+  const handleDeleteTask = (taskId) => {
+    const tasksAfterDelete = tasks.filter((task) => task.id !== taskId);
     setTasks(tasksAfterDelete);
+  };
+
+  // FUNCTION TO DELETE ALL TASKS
+  const handleDeleteAllTask = () => {
+    tasks.length = 0;
+    setTasks([...tasks]);
   };
 
   return (
@@ -64,7 +70,7 @@ export default function TaskBoard() {
         </div>
         {/* Search Box Ends */}
         <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
-          <TaskActions addButtonClick={() => setShowModal(true)} />
+          <TaskActions onAddClick={() => setShowModal(true)} onDeleteAllClick={handleDeleteAllTask} />
           <TaskList tasks={tasks} onEdit={handleEditTaskModal} onDelete={handleDeleteTask} />
         </div>
       </div>

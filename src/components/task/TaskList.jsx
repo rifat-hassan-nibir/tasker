@@ -36,7 +36,7 @@ export default function TaskList({ tasks, onEdit, onDelete }) {
               <td className="text-center">{task.priority}</td>
               <td>
                 <div className="flex items-center justify-center space-x-3">
-                  <button onClick={() => onDelete(task)} className="cursor-pointer text-red-500">
+                  <button onClick={() => onDelete(task.id)} className="cursor-pointer text-red-500">
                     Delete
                   </button>
                   <button onClick={() => onEdit(task)} className="text-blue-500 hover:cursor-pointer">
