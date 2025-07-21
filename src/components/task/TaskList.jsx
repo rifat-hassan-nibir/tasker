@@ -1,6 +1,6 @@
 import { FaStar } from "react-icons/fa";
 
-export default function TaskList({ tasks, onEdit, onDelete }) {
+export default function TaskList({ tasks, onFavorite, onEdit, onDelete }) {
   return (
     <div className="overflow-auto">
       <table className="table-fixed overflow-auto xl:w-full">
@@ -17,7 +17,11 @@ export default function TaskList({ tasks, onEdit, onDelete }) {
         <tbody>
           {tasks.map((task) => (
             <tr key={task.id} className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2">
-              <td>{task.isFavorite ? <FaStar color="yellow" /> : <FaStar color="gray" />}</td>
+              <td>
+                <button onClick={() => onFavorite(task.id)} className="cursor-pointer">
+                  {task.isFavorite ? <FaStar color="yellow" /> : <FaStar color="gray" />}
+                </button>
+              </td>
               <td>{task.title}</td>
               <td>
                 <div>{task.description}</div>
