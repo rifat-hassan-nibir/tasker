@@ -1,4 +1,12 @@
-export default function SearchTask() {
+import { useState } from "react";
+
+export default function SearchTask({ onSearch }) {
+  const [search, setSearch] = useState("");
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    onSearch(search);
+  };
   return (
     <form>
       <div className="flex">
@@ -9,8 +17,10 @@ export default function SearchTask() {
             className="z-20 block w-full bg-gray-800 px-4 py-2 pr-10 focus:outline-none"
             placeholder="Search Task"
             required
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
-          <button type="submit" className="absolute right-2 top-0 h-full rounded-e-lg text-white md:right-4">
+          <button type="submit" onClick={handleClick} className="absolute right-2 top-0 h-full rounded-e-lg text-white md:right-4">
             <svg className="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
               <path
                 stroke="currentColor"
